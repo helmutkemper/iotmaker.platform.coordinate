@@ -1,10 +1,10 @@
 package iotmaker_platform_coordinate
 
-type ICoordinate interface {
+type IDensity interface {
 	Set(value int)
 	Add(value int)
 	Sub(value int)
-	SetDensityFactor(value float64)
+	SetDensityFactor(value interface{})
 	Int() int
 	Float64() float64
 	Float32() float32
