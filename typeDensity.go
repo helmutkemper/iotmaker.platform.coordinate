@@ -37,7 +37,14 @@ func (el *Density) Sub(value int) {
 }
 
 func (el *Density) SetDensityFactor(value interface{}) {
-	el.DensityFactor = value.(int)
+
+	switch converted := value.(type) {
+	case float64:
+		el.DensityFactor = int(converted)
+	case int:
+		el.DensityFactor = converted
+	}
+
 	el.adjustDensity()
 }
 
