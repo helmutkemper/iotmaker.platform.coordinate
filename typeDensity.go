@@ -1,14 +1,11 @@
 package iotmaker_platform_coordinate
 
-import (
-	commonTypes "github.com/helmutkemper/iotmaker.santa_isabel_theater.commonTypes"
-	"strconv"
-)
+import "strconv"
 
 type Density struct {
-	OriginalValue commonTypes.Number
-	DensityFactor commonTypes.Number
-	DensityValue  commonTypes.Number
+	OriginalValue int
+	DensityFactor int
+	DensityValue  int
 }
 
 func (el *Density) adjustDensity() {
@@ -19,53 +16,52 @@ func (el *Density) adjustDensity() {
 	el.DensityValue = el.OriginalValue * el.DensityFactor
 }
 
-func (el *Density) Set(value commonTypes.Number) {
+func (el *Density) Set(value float64) {
+	el.OriginalValue = int(value)
+	el.adjustDensity()
+}
+
+func (el *Density) SetInt(value int) {
 	el.OriginalValue = value
 	el.adjustDensity()
 }
 
-func (el *Density) SetInt(value commonTypes.Number) {
-	el.OriginalValue = value
-	el.adjustDensity()
-}
-
-func (el *Density) Add(value commonTypes.Number) {
+func (el *Density) Add(value int) {
 	el.OriginalValue += value
 	el.adjustDensity()
 }
 
-func (el *Density) Sub(value commonTypes.Number) {
+func (el *Density) Sub(value int) {
 	el.OriginalValue -= value
 	el.adjustDensity()
 }
 
-func (el *Density) SetDensityFactor(value commonTypes.Number) {
+func (el *Density) SetDensityFactor(value interface{}) {
 
-	//switch converted := value.(type) {
-	//case float64:
-	//	el.DensityFactor = int(converted)
-	//case int:
-	//	el.DensityFactor = converted
-	//}
+	switch converted := value.(type) {
+	case float64:
+		el.DensityFactor = int(converted)
+	case int:
+		el.DensityFactor = converted
+	}
 
-	el.DensityFactor = value
 	el.adjustDensity()
 }
 
-func (el Density) Int() commonTypes.Number {
-	return el.DensityValue
+func (el Density) Int() int {
+	return int(el.DensityValue)
 }
 
-func (el Density) Float64() commonTypes.Number {
-	return el.DensityValue
+func (el Density) Float64() float64 {
+	return float64(el.DensityValue)
 }
 
-func (el Density) Float32() commonTypes.Number {
-	return el.DensityValue
+func (el Density) Float32() float32 {
+	return float32(el.DensityValue)
 }
 
-func (el Density) Float() commonTypes.Number {
-	return el.DensityValue
+func (el Density) Float() float64 {
+	return float64(el.DensityValue)
 }
 
 func (el Density) String() string {
